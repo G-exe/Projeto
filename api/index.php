@@ -11,18 +11,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title = $_POST['title'];
         $description = $_POST['description'];
         updateTask($id, $title, $description);
+
+        // Adiciona a linha abaixo para redirecionar após a atualização
+        header("Location: index.php");
+        exit(); // Certifica-se de encerrar a execução após o redirecionamento
+
     } elseif (isset($_POST['delete'])) {
         $id = $_POST['id'];
         deleteTask($id);
+    } elseif (isset($_POST['custom_update'])) {
+        // Lógica para lidar com a operação 'custom_update'
+        // ...
     }
 }
 
 $tasks = readTasks();
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Tarefas</title>
@@ -135,24 +143,23 @@ $tasks = readTasks();
     
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-function editTask(id, title, description) {
-    const newTitle = prompt('Novo título:', title);
-    const newDescription = prompt('Nova descrição:', description);
+        function editTask(id, title, description) {
+            const newTitle = prompt('Novo título:', title);
+            const newDescription = prompt('Nova descrição:', description);
 
-    if (newTitle !== null && newDescription !== null) {
-        $.post('index.php', {
-            id: id,
-            title: newTitle,
-            description: newDescription,
-            update: true
-        }, function (data) {
-            location.reload();
-        }).fail(function (error) {
-            console.error('Erro:', error.statusText);
-        });
-    }
-}
-
+            if (newTitle !== null && newDescription !== null) {
+                $.post('index.php', {
+                    id: id,
+                    title: newTitle,
+                    description: newDescription,
+                    update: true
+                }, function (data) {
+                    window.location.href = 'index.php';
+                }).fail(function (error) {
+                    console.error('Erro:', error.statusText);
+                });
+            }
+        }
 
     </script>
 </body>
