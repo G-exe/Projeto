@@ -7,9 +7,10 @@ $POSTGRES_HOST="ep-gentle-flower-83621518-pooler.us-east-1.postgres.vercel-stora
 $POSTGRES_PASSWORD="W9wu3PHXpZYy";
 $POSTGRES_DATABASE="tasks";
 
-$conn = pg_connect("host=$POSTGRES_HOST dbname=$POSTGRES_DATABASE user=$POSTGRES_USER password=$POSTGRES_PASSWORD");
+$conn = new mysqli($POSTGRES_HOST, $POSTGRES_USER, $POSTGRES_PASSWORD, $POSTGRES_DATABASE);
 
-if (!$conn) {
-    die("Connection failed: " . pg_last_error());
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
 ?>
