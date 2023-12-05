@@ -8,6 +8,6 @@ $POSTGRES_DATABASE = "task_manager";  // Alterado para task_manager
 $conn = pg_connect("host=$POSTGRES_HOST port=5432 dbname=$POSTGRES_DATABASE user=$POSTGRES_USER password=$POSTGRES_PASSWORD");
 
 if (!$conn) {
-    die("Connection failed: " . pg_last_error());
+    die("Connection failed: ");
 }
 ?>
