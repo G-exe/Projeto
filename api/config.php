@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$user = 'root';
+$user = 'cloud_admin';
 $password = '';
 $database = 'task_manager';
 
